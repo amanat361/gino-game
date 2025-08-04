@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Button } from "./ui/button"
 import { Card, CardContent } from "./ui/card"
 import { Input } from "./ui/input"
+import { config } from "../prompt"
 
 interface GameStepProps {
   text: string
@@ -32,7 +33,7 @@ export function GameStep({ text, options, onOptionSelect, isLoading = false }: G
                     <div className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                     <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
                   </div>
-                  <span className="text-xs sm:text-sm font-medium">Weaving your story...</span>
+                  <span className="text-xs sm:text-sm font-medium">{config.loadingText}</span>
                 </div>
               </div>
               
@@ -72,7 +73,7 @@ export function GameStep({ text, options, onOptionSelect, isLoading = false }: G
         <CardContent className="p-4 sm:p-6 md:p-8">
           <div className="text-center mb-6 sm:mb-8">
             <div className="relative">
-              <p className="text-base sm:text-lg leading-relaxed text-foreground/90 font-medium px-2">{text}</p>
+              <p className="text-lg sm:text-xl leading-relaxed text-foreground/90 font-medium px-2">{text}</p>
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-lg -z-10"></div>
             </div>
           </div>
@@ -83,13 +84,13 @@ export function GameStep({ text, options, onOptionSelect, isLoading = false }: G
                 <Button
                   key={index}
                   variant="outline"
-                  className="group h-auto p-3 sm:p-4 text-left justify-start whitespace-normal border-2 hover:border-primary/50 hover:bg-primary/5 transition-all duration-200 hover:scale-[1.02] hover:shadow-md active:scale-[0.98] touch-manipulation"
+                  className="group h-auto p-3 sm:p-4 text-left justify-start whitespace-normal border-2 hover:border-primary/50 hover:bg-primary/5 hover:text-foreground transition-all duration-200 hover:scale-[1.02] hover:shadow-md active:scale-[0.98] touch-manipulation"
                   onClick={() => onOptionSelect(option)}
                   disabled={isLoading}
                 >
                   <div className="flex items-center gap-3 w-full min-h-[40px]">
                     <div className="w-2 h-2 bg-primary/40 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all duration-200 flex-shrink-0"></div>
-                    <span className="flex-1 text-sm sm:text-base font-medium leading-snug">{option}</span>
+                    <span className="flex-1 text-base sm:text-lg font-medium leading-snug">{option}</span>
                   </div>
                 </Button>
               ))}
@@ -100,7 +101,7 @@ export function GameStep({ text, options, onOptionSelect, isLoading = false }: G
                 <Input
                   value={customInput}
                   onChange={(e) => setCustomInput(e.target.value)}
-                  placeholder="Or type your own choice..."
+                  placeholder={config.placeholder}
                   className="flex-1 text-sm sm:text-base"
                   disabled={isLoading}
                   onKeyDown={(e) => {
@@ -115,7 +116,7 @@ export function GameStep({ text, options, onOptionSelect, isLoading = false }: G
                   disabled={isLoading || !customInput.trim()}
                   className="px-4 sm:px-6 whitespace-nowrap"
                 >
-                  Go
+                  {config.buttonText}
                 </Button>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { GameStep } from "./components/GameStep"
+import { config } from "./prompt"
 import "./index.css"
 
 interface GameState {
@@ -75,17 +76,17 @@ export function App() {
         <div className="text-center mb-4">
           <div className="relative inline-block">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
-              Choice & Consequence
+              {config.appName}
             </h1>
             <div className="absolute -inset-2 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl blur-xl -z-10"></div>
           </div>
           <p className="text-muted-foreground text-base sm:text-lg font-medium mt-2 px-4">
-            Every choice matters
+            {config.tagline}
           </p>
           {history.length > 0 && (
             <div className="mt-3 sm:mt-4 inline-flex items-center gap-2 text-xs sm:text-sm text-muted-foreground bg-muted/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
               <div className="w-2 h-2 bg-primary rounded-full"></div>
-              <span>Step {history.length + 1}</span>
+              <span>{config.stepLabel(history.length + 1)}</span>
             </div>
           )}
         </div>
