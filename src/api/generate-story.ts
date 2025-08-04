@@ -10,6 +10,7 @@ const gameStateSchema = z.object({
 
 export interface GameHistory {
   text: string
+  availableOptions: string[]
   selectedOption: string
 }
 

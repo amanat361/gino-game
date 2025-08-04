@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { GameStep } from "./components/GameStep"
+import { StoryTree } from "./components/StoryTree"
 import { config } from "./prompt"
 import "./index.css"
 
@@ -10,6 +11,7 @@ interface GameState {
 
 interface GameHistory {
   text: string
+  availableOptions: string[]
   selectedOption: string
 }
 
@@ -59,6 +61,7 @@ export function App() {
 
     const newHistory = [...history, {
       text: gameState.text,
+      availableOptions: gameState.options,
       selectedOption,
     }]
     
@@ -90,6 +93,8 @@ export function App() {
             </div>
           )}
         </div>
+        
+        <StoryTree history={history} />
         
         {gameState && (
           <GameStep
